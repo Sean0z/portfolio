@@ -1,6 +1,22 @@
 ---
 import { siteConfig } from "../config";
+
 const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
+
+const isExternalLink = (link: string) => {
+  return link.startsWith("http://") || link.startsWith("https://");
+};
+
+const getHref = (link: string) => {
+  if (isExternalLink(link)) {
+    return link;
+  }
+
+  const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+  const cleanLink = link.replace(/^\//, "");
+
+  return `${base}/${cleanLink}`;
+};
 ---
 
 {
@@ -22,11 +38,16 @@ const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
             <div class="space-y-8">
               {siteConfig.projects.map((project, index) => {
                 const Component = project.link ? "a" : "div";
+
                 const linkProps = project.link
                   ? {
-                      href: project.link,
-                      target: "_blank",
-                      rel: "noopener noreferrer",
+                      href: getHref(project.link),
+                      ...(isExternalLink(project.link)
+                        ? {
+                            target: "_blank",
+                            rel: "noopener noreferrer",
+                          }
+                        : {}),
                     }
                   : {};
 
@@ -72,7 +93,9 @@ const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
                         </div>
 
                         <p
-                          class={`text-base sm:text-lg text-gray-600 leading-relaxed ${project.link ? "pr-12 sm:pr-14 md:pr-16" : ""}`}
+                          class={`text-base sm:text-lg text-gray-600 leading-relaxed ${
+                            project.link ? "pr-12 sm:pr-14 md:pr-16" : ""
+                          }`}
                         >
                           {project.description}
                         </p>

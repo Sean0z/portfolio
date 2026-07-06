@@ -15,53 +15,53 @@ export const siteConfig = {
 ],
   skills: ["Python", "TypeScript", "React", "Node.js", "Unity", "C#"],
   projects: [
-    {
-      name: "Comparing Match Outcome Prediciton Across Soccer, Tennis, and Baseball",
+{
+      name: "Comparing Match Outcome Prediction Across Soccer, Tennis, and Baseball",
       description:
-        "One concise email. Five minutes. Every Tuesday. Essential AI news & trends, production-ready libraries, powerful AI tools, and real-world code examples",
-      link: "https://aidevroundup.com/?ref=devportfolio",
-      skills: ["React", "Node.js", "AWS"],
+        "Built machine learning models to compare match outcome prediction across soccer, baseball, and tennis using public historical sports datasets. Engineered leakage-safe pre-match features, trained XGBoost classifiers across baseline and sport-specific feature sets, and found that soccer achieved the highest final accuracy while tennis benefited most from sport-specific statistics.",
+      link: "projects/sports/",
+      skills: ["Python", "XGBoost", "Machine Learning"],
     },
     {
       name: "Edge of Yvoire: a Physically Based Ray Tracer",
       description:
         "Kit to jump-start your Chrome extension projects with a variety of battle-tested starter templates & examples",
-      link: "https://extensionkit.io/?ref=devportfolio",
+      link: "projects/raytracer/",
       skills: ["React", "Node.js", "AWS"],
     },
     {
       name: "Chain",
       description:
         "Kit to jump-start your Chrome extension projects with a variety of battle-tested starter templates & examples",
-      link: "https://extensionkit.io/?ref=devportfolio",
+      link: "projects/chain/",
       skills: ["React", "Node.js", "AWS"],
     },
     {
       name: "PSH-Mini",
       description:
         "Kit to jump-start your Chrome extension projects with a variety of battle-tested starter templates & examples",
-      link: "https://extensionkit.io/?ref=devportfolio",
+      link: "projects/psh/",
       skills: ["React", "Node.js", "AWS"],
     },
     {
       name: "Row-mageddon",
       description:
         "Kit to jump-start your Chrome extension projects with a variety of battle-tested starter templates & examples",
-      link: "https://extensionkit.io/?ref=devportfolio",
+      link: "projects/rowmageddon/",
       skills: ["React", "Node.js", "AWS"],
     },
     {
       name: "Visualizing Monte Carlo Simulations for Options Pricing",
       description:
         "Kit to jump-start your Chrome extension projects with a variety of battle-tested starter templates & examples",
-      link: "https://extensionkit.io/?ref=devportfolio",
+      link: "projects/montecarlo/",
       skills: ["React", "Node.js", "AWS"],
     },
     {
       name: "Lazer Home",
       description:
         "Kit to jump-start your Chrome extension projects with a variety of battle-tested starter templates & examples",
-      link: "https://extensionkit.io/?ref=devportfolio",
+      link: "projects/lazer/",
       skills: ["React", "Node.js", "AWS"],
     },
   ],
