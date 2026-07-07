@@ -14,108 +14,101 @@ export const siteConfig = {
   " I’m especially interested in machine learning, human-computer interaction, game development, and full-stack software development. I’m always happy to chat about my work, new ideas, or whatever fantasy book I’m currently reading.",
 ],
   skills: ["Python", "TypeScript", "React", "Node.js", "Unity", "C#"],
-  projects: [
-{
-      name: "Comparing Match Outcome Prediction Across Soccer, Tennis, and Baseball",
-      description:
-        "Built machine learning models to compare match outcome prediction across soccer, baseball, and tennis using public historical sports datasets. Engineered leakage-safe pre-match features, trained XGBoost classifiers across baseline and sport-specific feature sets, and found that soccer achieved the highest final accuracy while tennis benefited most from sport-specific statistics.",
-      link: "projects/sports/",
-      skills: ["Python", "XGBoost", "Machine Learning"],
-    },
-    {
-      name: "Edge of Yvoire: a Physically Based Ray Tracer",
-      description:
-        "Kit to jump-start your Chrome extension projects with a variety of battle-tested starter templates & examples",
-      link: "projects/raytracer/",
-      skills: ["React", "Node.js", "AWS"],
-    },
-    {
-      name: "Chain",
-      description:
-        "Kit to jump-start your Chrome extension projects with a variety of battle-tested starter templates & examples",
-      link: "projects/chain/",
-      skills: ["React", "Node.js", "AWS"],
-    },
-    {
-      name: "PSH-Mini",
-      description:
-        "Kit to jump-start your Chrome extension projects with a variety of battle-tested starter templates & examples",
-      link: "projects/psh/",
-      skills: ["React", "Node.js", "AWS"],
-    },
-    {
-      name: "Row-mageddon",
-      description:
-        "Kit to jump-start your Chrome extension projects with a variety of battle-tested starter templates & examples",
-      link: "projects/rowmageddon/",
-      skills: ["React", "Node.js", "AWS"],
-    },
-    {
-      name: "Visualizing Monte Carlo Simulations for Options Pricing",
-      description:
-        "Kit to jump-start your Chrome extension projects with a variety of battle-tested starter templates & examples",
-      link: "projects/montecarlo/",
-      skills: ["React", "Node.js", "AWS"],
-    },
-    {
-      name: "Lazer Home",
-      description:
-        "Kit to jump-start your Chrome extension projects with a variety of battle-tested starter templates & examples",
-      link: "projects/lazer/",
-      skills: ["React", "Node.js", "AWS"],
-    },
-  ],
+projects: [
+  {
+    name: "Chain",
+    description:
+      "An AI-powered Chrome extension that identifies keywords on webpages and injects contextual hyperlinks and summary previews for knowledge exploration.",
+    link: "projects/chain/",
+    skills: ["JavaScript", "Gemini API", "Chrome Extensions"],
+  },
+  {
+    name: "Sports Outcome Prediction Models",
+    description:
+      "A small-scale applied machine learning research project comparing match outcome prediction across soccer, baseball, and tennis using public historical sports datasets.",
+    link: "projects/sports/",
+    skills: ["Python", "XGBoost", "Machine Learning"],
+  },
+  {
+    name: "Edge of Yvoire: A Physically Based Ray Tracer",
+    description:
+      "A physically based ray tracer in C++ that uses the Lightwave framework to implement core rendering features such as path tracing, ray-object intersections, and acceleration structures to render a custom Blender scene.",
+    link: "projects/raytracer/",
+    skills: ["C++", "Blender", "Computer Graphics"],
+  },
+  {
+    name: "Visualizing Monte Carlo Simulations for Options Pricing",
+    description:
+      "An interactive article explaining how option prices are estimated using Monte Carlo simulations.",
+    link: "projects/montecarlo/",
+    skills: ["Python", "D3.js", "Data Visualization"],
+  },
+  {
+    name: "Row-mageddon",
+    description:
+      "A 16-bit pixel art rowing game for the web where players manage rowing rhythm, power-ups, and customizable boats to race through four seasonal maps.",
+    link: "projects/rowmageddon/",
+    skills: ["Unity", "C#", "Game Development"],
+  },
+  {
+    name: "PSH-Mini",
+    description:
+      "A miniature physical pumped storage hydropower model for SeaClimateHack 2025 with a SCADA-style dashboard controlled by a 24-hour simulation of the California power grid.",
+    link: "projects/psh/",
+    skills: ["React", "Node.js", "Data Visualization"],
+  },
+  {
+    name: "Lazer Home",
+    description:
+      "An audio-visual VR experience made during Stanford's Immerse The Bay 2024 for the Meta Quest 3 that lets users customize their own concert experience.",
+    link: "projects/lazer/",
+    skills: ["C#", "Unity", "Virtual Reality"],
+  },
+],
   experience: [
     {
-      company: "Tech Company",
-      title: "Senior Software Engineer",
-      dateRange: "Jan 2022 - Present",
+      company: "University of Washington, Department of Electrical & Computer Engineering",
+      title: "Front Desk Student Worker - Lead",
+      dateRange: "Aug 2023 - Jun 2026",
       bullets: [
-        "Led development of microservices architecture serving 1M+ users",
-        "Reduced API response times by 40% through optimization",
-        "Mentored team of 5 junior developers",
+        "Managed logistics and building operations for a department of 1,300+ students, faculty, and staff.",
+        "Assisted with event support, department communications, lab deliveries, and the hiring and training of 11 ECE student workers.",
       ],
     },
     {
-      company: "Startup Inc",
-      title: "Full Stack Developer",
-      dateRange: "Jun 2020 - Dec 2021",
+      company: "University of Washington, Interactive Data Lab",
+      title: "Research Assistant",
+      dateRange: "May 2025 - Sep 2025",
       bullets: [
-        "Built and launched MVP product from scratch using React and Node.js",
-        "Implemented CI/CD pipeline reducing deployment time by 60%",
-        "Collaborated with product team to define technical requirements",
+          "Collaborated with two PhD students on exploratory research using large language models to develop a dashboard recommendation system from natural language input.",
+          "Conducted a literature review of 20+ research papers on user intent prediction, query decomposition, and LLM-based visualization recommendations to inform future MVP design.",
       ],
     },
     {
-      company: "Digital Agency",
-      title: "Frontend Developer",
-      dateRange: "Aug 2018 - May 2020",
+      company: "OpenBrackets Coding",
+      title: "Volunteer Python Teacher",
+      dateRange: "Mar 2021 - May 2022",
       bullets: [
-        "Developed responsive web applications for 20+ clients",
-        "Improved site performance scores by 35% on average",
-        "Introduced modern JavaScript frameworks to legacy codebases",
+        "Taught introductory Python courses to 50+ K-8 students from underserved areas over Zoom.",
+        "Developed and refined two course curricula and received the President’s Volunteer Service Award Bronze Medal for 100+ hours of volunteering.",
       ],
     },
   ],
   education: [
     {
-      school: "University Name",
-      degree: "Bachelor of Science in Computer Science",
-      dateRange: "2014 - 2018",
+      school: "University of Washington",
+      degree: "B.S. in Computer Science",
+      dateRange: "Sep 2022 - Jun 2026",
       achievements: [
-        "Graduated Magna Cum Laude with 3.8 GPA",
-        "Dean's List all semesters",
-        "President of Computer Science Club",
+        "Paul G. Allen School of Computer Science & Engineering",
       ],
     },
     {
-      school: "Online Platform",
-      degree: "Full Stack Development Certificate",
-      dateRange: "2019",
+      school: "Universität des Saarlandes",
+      degree: "Departmental Exchange, Computer Science",
+      dateRange: "Oct 2025 - Feb 2026",
       achievements: [
-        "Completed 500+ hours of coursework",
-        "Built 10+ portfolio projects",
-        "Specialized in React and Node.js",
+        "Studied computer science through a departmental exchange program in Saarbrücken, Germany.",
       ],
     },
   ],
