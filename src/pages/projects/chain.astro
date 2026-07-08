@@ -1,31 +1,249 @@
 ---
-import "../../styles/global.css";
-import { siteConfig } from "../../config";
+import ProjectPage from "../../components/ProjectPage.astro";
 ---
 
-<html lang="en">
-  <head>
-    <title>Chain | {siteConfig.name}</title>
-  </head>
+<ProjectPage
+  title="Chain"
+  date="May 2025 - June 2025"
+  youtubeUrl="https://www.youtube.com/embed/ILj77k9WDx4"
+>
+  <Fragment slot="overview">
+    <p>
+      Chatbot-based AI is often not ideal for tasks like website exploration, which involves branching 
+      paths ill-suited to chronological conversations. Chain is a Chrome extension designed to combat this, 
+      turning ordinary webpages into more interactive, Wikipedia-like resources.
+    </p>
 
-  <body>
-    <main class="min-h-screen p-8 sm:p-12 md:p-16 lg:p-24">
+    <p>
+      Using Gemini, Chain identifies important keywords on a webpage based on the page content, browser context, predicted user goals, 
+      and editable personas. It then inserts contextual links and summary previews directly into the page, helping users explore information 
+      more easily without leaving their current browsing flow.
+    </p>
+  </Fragment>
+
+  <Fragment slot="role">
+    <p>
+      I focused primarily on the Chrome extension implementation and the user-facing
+      browsing experience. This included building the HTML and CSS for the sidebar,
+      creating the API key interface where users enter their Gemini API key, and
+      implementing controls for generating personas, editing personas, and toggling
+      highlights on the page.
+    </p>
+
+    <p>
+      I also worked on the persona system, including generating personas from the
+      user’s open tabs and storing past personas so they could be reused
+      later. This system helped Chain personalize which keywords were highlighted,
+      which links were selected, and how summaries were written for different users
+      and tasks.
+    </p>
+
+    <p>
+      I helped build the asynchronous DOM traversal
+      system that identifies safe text nodes, preserves existing links, and inserts
+      Chain’s highlights and hyperlinks directly into the webpage. I also worked on
+      prompt engineering for the Gemini calls used to generate keywords, retrieve
+      hyperlinks, and produce tooltip summaries.
+    </p>
+  </Fragment>
+
+  <Fragment slot="how-it-works">
+    <p>
+      When a user opens the extension, Chain reads the current webpage along with
+      other open tabs to understand the user’s browsing context. Based on that
+      context, it either selects a relevant past persona or generates a new one.
+      Chain then identifies important keywords on the current page and highlights
+      them as keywords directly in the webpage.
+    </p>
+
+    <p>
+      For each highlighted keyword, Chain uses the selected persona and other
+      contextual information to find a relevant article on the web and link it to
+      the highlighted text. The linked article acts as the base source, and Chain
+      can also find up to five related articles to generate a short summary for
+      the keyword.
+    </p>
+
+     <p>
+      These summaries appear in a tooltip when the user hovers over a highlighted
+      keyword. The tooltip lists the main linked article first, followed by any
+      additional sources used to generate the summary. Users can also create or
+      edit personas from the sidebar to change the selected keywords and links,
+      and they can toggle highlights on or off at any time.
+    </p>
+  </Fragment>
+
+  <Fragment slot="technical-implementation">
+    <p>
+      Chain was built as a Manifest V3 Chrome extension using JavaScript, HTML,
+      and CSS. The extension uses content scripts to read and modify webpages, a
+      sidebar interface for user controls, and Gemini models for keyword
+      extraction, persona generation, link selection, and summary generation.
+    </p>
+
+    <p>
+      To make highlighting feel responsive, Chain uses Gemini 2.5 Flash Lite to
+      identify keywords on each page. Since these highlights need to be
+      generated quickly before links can be injected, the lighter model was used
+      for lower-latency tasks such as keyword extraction and persona generation.
+    </p>
+
+    <p>
+      Chain then uses an asynchronous DOM traversal and injection pipeline to add
+      highlighted links directly into the webpage while preserving existing links.
+      Summaries are stored as Promises and filled in lazily, allowing the page to
+      become interactive before every tooltip summary has finished generating.
+    </p>
+
+    <p>
+      For tooltip summaries, Chain uses Gemini 2.5 Flash because summary quality
+      matters more than immediate response time. Keywords are grouped into batched
+      API requests, and summaries are generated in the background for the full
+      page. This design helped reduce visible latency while still producing richer
+      source-backed summaries for each highlighted keyword.
+    </p>
+  </Fragment>
+
+  <Fragment slot="challenges">
+    <p>
+      One of the biggest challenges was injecting links into arbitrary webpages
+      without breaking the page layout or interfering with existing links. Our
+      original design used an overlay that placed highlights and hyperlinks on top
+      of the webpage. However, this meant that preexisting links on the page were
+      no longer usable, since only Chain’s overlay links were clickable.
+    </p>
+
+    <p>
+      To solve this, we replaced the overlay approach with an asynchronous DOM
+      traversal system that inserts highlights and links directly into the page’s
+      DOM. This allowed Chain to preserve existing links while adding its own
+      contextual links. Summaries were stored as Promises and filled in later, so
+      we did not need to repeatedly traverse the DOM for every tooltip update.
+    </p>
+
+    <p>
+      Another major challenge was reducing latency. Originally, Chain generated all
+      hyperlinks and summaries before inserting anything into the page. This caused
+      a long delay between the user starting the process and seeing any visible
+      results, which made the extension feel slow.
+    </p>
+
+    <p>
+      We addressed this by separating fast and slow tasks. Chain first uses Gemini
+      2.5 Flash Lite to identify important keywords and retrieve the initial links,
+      then injects those highlights as soon as they are ready. Longer tooltip
+      summaries are generated in the background while the user continues reading
+      the page. This made the extension feel much more responsive because useful
+      results appeared quickly instead of waiting for every summary to finish.
+    </p>
+
+    <p>
+      A third challenge was preventing LLM hallucinations. When we initially asked
+      Gemini to generate relevant URLs directly, it sometimes returned links that
+      looked real but led to invalid pages. Since users may also be cautious about
+      trusting LLM-generated information, we wanted each tooltip to clearly show
+      the sources used for its summary.
+    </p>
+
+    <p>
+      To address this, we added search grounding to the Gemini API calls. This
+      helped Chain return real, visitable links and made it easier to display
+      clickable sources inside each tooltip. Grounding also improved the reliability
+      and quality of the generated summaries by tying them to web sources instead of relying
+      only on the model’s internal knowledge.
+    </p>
+
+    <p>
+      Another challenge was working within Gemini’s free-tier rate limits. Because
+      search grounding made the system more reliable but also increased the number
+      of API calls, we had to be careful about how summaries were generated.
+    </p>
+
+    <p>
+      To reduce the impact of rate limits, Chain batches keywords and prioritizes
+      summaries for the most important and earliest-occurring keywords first. This
+      allowed the extension to provide useful tooltips quickly while continuing to
+      fill in the rest of the page as more requests became available.
+    </p>
+  </Fragment>
+
+  <Fragment slot="results">
+    <p>
+      One of the biggest lessons from Chain was that personalization significantly
+      improved the quality of the generated keywords, links, and summaries. In the
+      initial version, Chain could identify keywords and insert links, but the
+      results often felt shallow. Many of the highlighted keywords were generic,
+      common-knowledge terms that changed mostly because of randomness rather than
+      because they were genuinely useful to the user.
+    </p>
+
+    <p>
+      After experimenting with prompt engineering and adding more context about the
+      user’s goals, browsing history, and persona, the extension began producing
+      more targeted and useful results. For example, when Chain used a persona
+      describing a French international student exploring a U.S. travel website for
+      the first time, the generated summaries adapted to that context and explained
+      information in French. This made the browsing experience feel more meaningful
+      and personalized rather than generic.
+    </p>
+
+    <p>
+      Another important insight from usability testing was that human control is
+      essential when building LLM-powered interfaces. In the original design, users
+      had no way to edit or replace the generated persona. Testing revealed that
+      this caused frustration when the persona included incorrect information,
+      missed important context, or was unrelated to the user’s actual task.
+    </p>
+
+    <p>
+      To address this, we added controls that allowed users to generate a new
+      persona and directly edit the persona text. Since the persona influenced the
+      selected keywords, generated links, and tooltip summaries, giving users ways to edit
+      it made them feel like they had the final say over the LLM. 
+      
+    </p>
+
+    <p>
+      Overall, Chain was a great project for learning more about prompt
+      engineering, persona-based generation, and how LLMs can be used to augment
+      everyday tasks. Rather than replacing the user’s role in exploration, Chain
+      showed how AI can support users by surfacing relevant context at the right
+      moment while still leaving them in control.
+    </p>
+  </Fragment>
+
+  <Fragment slot="links">
+    <ul class="list-disc pl-6 space-y-2">
+      <li>
+        <a
+          href="https://github.com/Sean0z/Chain"
+          class="text-blue-600 hover:underline"
+          target="_blank"
+        >
+          GitHub Repository
+        </a>
+      </li>
+
+      <li>
+        <a
+          href="https://www.youtube.com/watch?v=ILj77k9WDx4"
+          class="text-blue-600 hover:underline"
+          target="_blank"
+        >
+          Demo Video
+        </a>
+      </li>
+
+      <li>
       <a
-        href={`${import.meta.env.BASE_URL}#projects`}
-        class="text-gray-600 hover:text-gray-900"
+        href={`${import.meta.env.BASE_URL}/chain-poster.pdf`}
+        class="text-blue-600 hover:underline"
+        target="_blank"
+        rel="noopener noreferrer"
       >
-        &larr; Back to projects
+        View Poster
       </a>
-
-      <section class="mt-12">
-        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900">
-          Chain
-        </h1>
-
-        <p class="mt-6 text-lg sm:text-xl text-gray-600 leading-relaxed">
-          This is a test page for the Chain project.
-        </p>
-      </section>
-    </main>
-  </body>
-</html>
+    </li>
+    </ul>
+  </Fragment>
+</ProjectPage>

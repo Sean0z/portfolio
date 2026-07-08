@@ -1,0 +1,135 @@
+---
+import "../styles/global.css";
+import { siteConfig } from "../config";
+
+type Props = {
+  title: string;
+  date?: string;
+  youtubeUrl?: string;
+};
+
+const { title, date, youtubeUrl } = Astro.props;
+
+const hasOverview = Astro.slots.has("overview");
+const hasRole = Astro.slots.has("role");
+const hasHowItWorks = Astro.slots.has("how-it-works");
+const hasTechnicalImplementation = Astro.slots.has("technical-implementation");
+const hasChallenges = Astro.slots.has("challenges");
+const hasResults = Astro.slots.has("results");
+const hasLinks = Astro.slots.has("links");
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} | {siteConfig.name}</title>
+  </head>
+
+  <body>
+    <main class="min-h-screen px-8 py-12 sm:px-12 md:px-16 lg:px-24">
+      <a
+        href={`${import.meta.env.BASE_URL}#projects`}
+        class="text-gray-600 hover:text-gray-900"
+      >
+        &larr; Back to projects
+      </a>
+
+      <article class="mx-auto mt-12 max-w-6xl">
+        <!-- Hero video -->
+        {youtubeUrl && (
+          <div class="mx-auto w-full max-w-5xl aspect-video overflow-hidden rounded-2xl border border-gray-200 shadow-xl">
+            <iframe
+              class="h-full w-full"
+              src={youtubeUrl}
+              title={`${title} project demo video`}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+        )}
+
+        <!-- Title section -->
+        <section class="mx-auto mt-12 max-w-3xl text-center">
+          {date && (
+            <p class="text-base sm:text-lg text-gray-500">
+              {date}
+            </p>
+          )}
+
+          <h1 class="mt-4 text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900">
+            {title}
+          </h1>
+
+          <hr class="mt-10 border-gray-200" />
+        </section>
+
+        <!-- Project sections -->
+        <div class="mx-auto mt-12 max-w-3xl space-y-12 text-lg leading-relaxed text-gray-800">
+          {hasOverview && (
+            <section>
+              <h2 class="text-2xl font-bold text-gray-900">Overview</h2>
+              <div class="mt-4 space-y-4">
+                <slot name="overview" />
+              </div>
+            </section>
+          )}
+
+          {hasRole && (
+            <section>
+              <h2 class="text-2xl font-bold text-gray-900">My Role</h2>
+              <div class="mt-4 space-y-4">
+                <slot name="role" />
+              </div>
+            </section>
+          )}
+
+          {hasHowItWorks && (
+            <section>
+              <h2 class="text-2xl font-bold text-gray-900">How It Works</h2>
+              <div class="mt-4 space-y-4">
+                <slot name="how-it-works" />
+              </div>
+            </section>
+          )}
+
+          {hasTechnicalImplementation && (
+            <section>
+              <h2 class="text-2xl font-bold text-gray-900">Technical Implementation</h2>
+              <div class="mt-4 space-y-4">
+                <slot name="technical-implementation" />
+              </div>
+            </section>
+          )}
+
+          {hasChallenges && (
+            <section>
+              <h2 class="text-2xl font-bold text-gray-900">Biggest Challenges</h2>
+              <div class="mt-4 space-y-4">
+                <slot name="challenges" />
+              </div>
+            </section>
+          )}
+
+          {hasResults && (
+            <section>
+              <h2 class="text-2xl font-bold text-gray-900">Results and Lessons Learned</h2>
+              <div class="mt-4 space-y-4">
+                <slot name="results" />
+              </div>
+            </section>
+          )}
+
+          {hasLinks && (
+            <section>
+              <h2 class="text-2xl font-bold text-gray-900">Links</h2>
+              <div class="mt-4 space-y-4">
+                <slot name="links" />
+              </div>
+            </section>
+          )}
+        </div>
+      </article>
+    </main>
+  </body>
+</html>

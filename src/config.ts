@@ -9,9 +9,9 @@ export const siteConfig = {
     github: "https://github.com/Sean0z",
   },
   aboutMe: [
-  "I’m a recent graduate from the University of Washington’s Paul G. Allen School of Computer Science & Engineering, where I received a B.S. in Computer Science. I’m interested in building interactive systems that make technology more useful, intuitive, and personal.",
-  " My experience spans AI-powered tools, full-stack web apps, data visualization, computer graphics, game development, and human-computer interaction. Recent projects include an AI-powered Chrome extension, a physically based ray tracer, and machine learning models for sports outcome prediction, all of which you can explore below.",
-  " I’m especially interested in machine learning, human-computer interaction, game development, and full-stack software development. I’m always happy to chat about my work, new ideas, or whatever fantasy book I’m currently reading.",
+  "I’m a recent graduate from the University of Washington’s Paul G. Allen School of Computer Science & Engineering, where I received a B.S. in Computer Science. I’m interested in building unique applications that introduce new ways for people to interact with technology.",
+  " My experience spans AI-powered tools, full-stack web apps, data visualization, computer graphics, game development, and human-computer interaction. Some recent projects include an AI-powered Chrome extension, a physically based ray tracer, and machine learning models for sports outcome prediction, all of which you can explore below.",
+  " I’m especially interested in machine learning, game development, and full-stack software development. I’m always happy to chat about my work, new ideas, or whatever fantasy book I’m currently reading.",
 ],
   skills: ["Python", "TypeScript", "React", "Node.js", "Unity", "C#"],
 projects: [
@@ -48,7 +48,7 @@ projects: [
     description:
       "A 16-bit pixel art rowing game for the web where players manage rowing rhythm, power-ups, and customizable boats to race through four seasonal maps.",
     link: "projects/rowmageddon/",
-    skills: ["Unity", "C#", "Game Development"],
+    skills: ["C#", "Unity", "Game Development"],
   },
   {
     name: "PSH-Mini",
